@@ -1,0 +1,76 @@
+---
+title: "dnaseqtool"
+author: "Perezhil Nagendirakumar"
+date: "4/26/2022"
+output: html_document
+---
+# dnaseqtool package :
+
+dnaseqtool is a package developed for the nucleotide sequence analysis especially DNA sequence containing Adenine "A", Thymine "T" , Guanine "G" and Cytosine "C" basepairs retrieved from database like NCBI using accession id to get some meaningful insights of the sequence.
+
+ **Retrival of sequence from database** :
+ 
+I tested dnaseqtool package to analyse the dengue virus sequence retrived from NCBI database using  rentrez package ::entrez_fetch function . Dengue virus causes Dengue fever, which is classified as a neglected tropical disease by the World Health Organization (WHO), is classified by any one of four types of Dengue virus: DEN-1, DEN-2, DEN-3, and DEN-4. The NCBI accessions for the DNA sequences of the DEN-1, DEN-2, DEN-3, and DEN-4 Dengue viruses are
+1.NC_001477
+2.NC_001474
+3.NC_001475
+4.NC_002640
+
+ 
+```{r}
+#Retrieving the nucleotide sequence of den4 using its "NC_002640" accession id in ncbi database and
+#storing it in a variable getncbiseq
+library(seqinr)
+getncbiseq <- rentrez::entrez_fetch(db = "nucleotide",
+                                    id = "NC_002640",    
+                                     rettype = "fasta")
+getncbiseq
+```
+```{r}
+#writing it in fasta format 
+write(getncbiseq,
+      file="deng4.fasta")
+```
+```{r}
+# reading the fasta file and storing in a variavle called dengue and to access read.fasta seqinr package is required 
+library(seqinr)
+dengue<-read.fasta(file ="deng4.fasta", as.string = TRUE, forceDNAtolower = FALSE)
+dengue
+dengueseq<-dengue[[1]]
+dengueseq
+
+```
+**Analysis of the nucleotide sequence** :
+
+1.**complementary dna synthesis**:
+
+cdna function generates a complementary dna for the input fasta file dengueseq by replacing Adenine "A" with Thymine"T"and Guanine "G" with Cytosine "C" and vice versa .
+```{r}
+dnaseqtool:::cdna(dengueseq)
+
+```
+
+2.**calculate AT **:
+
+AT function calculates percentage of Adenine and Thymine nucleotide basepair composition in the input fasta file dengueseq 
+```{r}
+dnaseqtool:::AT(dengueseq)
+```
+
+3. **calculate GC **
+
+GC function calculates percentage of Guanine and Cytosine nucleotide basepair composition in the input fasta file dengseq. 
+
+```{r}
+dnaseqtool:::GC(dengueseq)
+```
+
+4. **sliding window plot **
+
+sliding plot function gives a graphical/visual representation of nucleotides basepair for the dengue sequence . To do that I have included the first 210 nucleotide of the dengueseq. It requires Zoo package . 
+```{r}
+library(zoo)
+slidinginput<-("AGTTGTTAGTCTGTGTGGACCGACAAGGACAGTTCCAAATCGGAAGCTTGCTTAACACAGTTCTAACAGT
+TTGTTTGAATAGAGAGCAGATCTCTGGAAAAATGAACCAACGAAAAAAGGTGGTTAGACCACCTTTCAAT
+ATGCTGAAACGCGAGAGAAACCGCGTATCAACCCCTCAAGGGTTGGTGAAGAGATTCTCAACCGGACTTT")
+dnaseqtool:::slidingplot(10,slidinginput)

@@ -1,0 +1,19 @@
+# Retrieving the nucleotide sequence of dengue virus type 4 from ncbi database using rentrez::entrez_fetch package
+
+# downloading and calling the package seqinr to access write.fasta()function
+install.packages(seqinr)
+library(seqinr)
+#Retrieving the nucleotide sequence of den4 using its "NC_002640" accession id in ncbi database and
+#storing it in a variable getncbiseq
+getncbiseq <- rentrez::entrez_fetch(db = "nucleotide",
+                                    id = "NC_002640",    # change accession
+                                    rettype = "fasta")
+getncbiseq
+# writing it in fasta format
+write(getncbiseq,
+      file="deng4.fasta")
+
+dengue<-read.fasta(file ="deng4.fasta", as.string = TRUE, forceDNAtolower = FALSE)
+dengue
+dengueseq<-dengue[[1]]
+dengueseq
