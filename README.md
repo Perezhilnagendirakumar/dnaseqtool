@@ -1,5 +1,5 @@
-# dnaseqtool
-A package to analyze nucleotide sequence, especially DNA sequence containing Adenine “A”, Thymine “T”, Guanine “G” and Cytosine “C” basepairs retrieved from database like NCBI using accession id to get some meaningful insights of the sequence.
+# dnaseqtool package 
+It is a package developed to analyze nucleotide sequence, especially DNA sequence containing Adenine “A”, Thymine “T”, Guanine “G” and Cytosine “C” basepairs retrieved from database like NCBI using accession id to get some meaningful insights of the sequence.
 
 ****Features****
 
@@ -7,7 +7,7 @@ It has multiple R scripts containing four functions:
 
 1.***Retrival.txt***:
 
-This file is present in the data folder have the code to retrieve dengue virus dataset from NCBI database using accession id with the help of rentrez package. 
+This file is present in the data folder that have the code to retrieve dengue virus dataset from NCBI database using accession id with the help of rentrez package. 
 Four types of Dengue virus: DEN-1, DEN-2, DEN-3, and DEN-4.
 The NCBI accessions for the DNA sequences of the DEN-1, DEN-2, DEN-3, and DEN-4 Dengue viruses are 1.NC_001477 2.NC_001474 3.NC_001475 4.NC_002640
 
@@ -27,3 +27,13 @@ GC function calculates the percentage of Guanine and Cytosine nucleotide basepai
 5.***slidingplot. R***: 
 
 sliding plot function gives a graphical/visual representation of nucleotides basepair for the input sequence.
+
+
+
+
+
+
+
+***Author***: Perezhil Nagendirakumar 
+
+***maintainer***: perezhil@usf.edu 
